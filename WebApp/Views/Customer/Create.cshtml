@@ -1,0 +1,75 @@
+﻿@model WebApp.ViewModel.OrderViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Create</h3>
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green-sharp">
+                        <i class="icon-user-follow font-green-sharp"></i>
+
+                        <span class="caption-helper hide"></span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div id="dv-alert"></div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.customer.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.customer.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.customer.CustomerName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.customer.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.customer.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.customer.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.customer.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.customer.City, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.customer.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+
+                            <button type="submit" class="btn btn-success" id="btn-save">
+                                <i class="fa fa-check"></i>
+                                Save
+                            </button>
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn default" })
+                        </div>
+                    </div>
+                </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

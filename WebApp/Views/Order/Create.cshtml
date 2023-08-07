@@ -1,0 +1,166 @@
+﻿@model WebApp.ViewModel.OrderViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Create</h3>
+<div align="center">
+    @using (Html.BeginForm("create", "Order", FormMethod.Post))
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.order.OrderDate)
+                </td>
+                <td>                  
+                    @Html.EditorFor(model => model.order.OrderDate, new { id = "orderDate" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.CustomerID)</td>
+                <td>
+                    <select name="@Html.NameFor(model => model.order.CustomerID)"
+                            id="customer-id"
+                            class="form-control select9" aria-hidden="true"
+                            data-val="true" data-val-number="The field Costomer must be a number." data-val-required="Costomer is required">
+                        <option value="0">- Please select Costomer -</option>
+                        @foreach (var item in ViewBag.listCustomers)
+                        {
+                            <option value="@item.CustomerID"
+                                    data-customername="@item.CustomerName"
+                                    data-address="@item.Address">
+                                @item.CustomerID
+                            </option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.CustomerName)</td>
+                <td>
+                    <input type="text" id="customer-name" , disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.Address)</td>
+                <td>
+                    <input type="text" id="address-name" , disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.order.RequiredDate)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.order.RequiredDate, new { id = "RequiredDate" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.order.OrderName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.order.OrderName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.ProductID)</td>
+                <td>
+                    <select name="@Html.NameFor(model => model.order.ProductID)"
+                            id="product-id"
+                            class="form-control select9" aria-hidden="true"
+                            data-val="true" data-val-number="The field Product must be a number." data-val-required="Product is required">
+                        <option value="0">- Please select Product -</option>
+                        @foreach (var item in ViewBag.listProducts)
+                        {
+                            <option value="@item.ProductID"
+                                    data-productname="@item.ProductName"
+                                    data-price="@item.Price">
+                                @item.ProductID
+                            </option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.ProductName)</td>
+                <td>
+                    <input type="text" id="product-name" , disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.Price)</td>
+                <td>
+                    <input type="text" id="unitprice-name" , disabled="disabled" />
+                    @Html.TextBoxFor(model => model.order.Harga, new { id = "harga", visible = "true" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.Qty)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.order.Qty, new { id = "Qty" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.order.Total)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.order.Total, new { id = "Total" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Save" /> &nbsp; <a class="btn-primary" href="@Url.Action("Index","Order")"> Back </a>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+@section Scripts{
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   
+    <script>
+        //Date Picker
+        $(document).ready(function () {
+            $("#orderDate").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $(document).ready(function () {
+            $("#RequiredDate").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+
+       
+
+        $(document).ready(function () {
+            $('#customer-id').on('change', function (e) {
+                //alert("Hello World!");
+                $("#customer-name").val($(this).find(':selected').data('customername'));
+                $("#address-name").val($(this).find(':selected').data('address'));
+            });
+        });
+
+        $(document).ready(function () {
+            $('#product-id').on('change', function (e) {
+                //alert("Hello World!");
+                $("#product-name").val($(this).find(':selected').data('productname'));
+                str = $("#unitprice-name").val($(this).find(':selected').data('price'));
+                $("#harga").val($(this).find(':selected').data('price'));
+            });
+        });
+
+        $(document).ready(function () {
+            $('#Qty').on('change', function (e) {
+                var price = 0;
+                var qty = 0;
+                var SubTotal = 0;
+                price = $("#unitprice-name").val() == '' ? 0 : $("#unitprice-name").val();
+                qty = $("#Qty").val() == '' ? 0 : $("#Qty").val();
+                SubTotal = parseFloat(price) *
+                    parseFloat(qty)
+                $("#Total").val(SubTotal);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@model WebApp.ViewModel.OrderViewModel
+<h3> Edit </h3>
+<div align="center" width="500px">
+    @using (Html.BeginForm("Edit", "Order", FormMethod.Post))
+    {
+    <table class="table"
+           width="400px"
+           cellpadding="20">
+        <tr class="btn-default">
+            <td>
+                @Html.LabelFor(model => model.order.OrderDate)
+            </td>
+
+            <td>
+                @Html.TextBoxFor(model => model.order.OrderDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.CustomerID)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.order.CustomerID)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.RequiredDate)
+            </td>
+
+            <td>
+                @Html.TextBoxFor(model => model.order.RequiredDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.OrderName)
+            </td>
+
+            <td>
+                @Html.TextBoxFor(model => model.order.OrderName)
+            </td>
+        </tr>
+        <tr>
+        <td>
+            @Html.LabelFor(model => model.order.ProductID)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.order.ProductID)
+        </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.Qty)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.order.Qty)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.Harga)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.order.Harga)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.order.Total)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.order.Total)
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>
+                <input type="submit" value="Save" /> &nbsp; <a class="btn-primary" href="@Url.Action("Index","Order")"> Back </a>
+                @Html.HiddenFor(model => model.order.OrderId)
+            </td>
+        </tr>
+    </table>
+    }
+</div>
+

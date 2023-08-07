@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@model WebApp.ViewModel.OrderViewModel
+<h3> Edit </h3>
+<div align="center" width="500px">
+    @using (Html.BeginForm("Edit", "Customer", FormMethod.Post))
+    {
+        <table class="table"
+               width="400px"
+               cellpadding="20">
+            <tr class="btn-default">
+                <td>
+                    @Html.LabelFor(model => model.customer.CustomerName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.customer.CustomerName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.customer.Address)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.customer.Address)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.customer.City)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.customer.City)
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td>
+                    <input type="submit" value="Save" /> &nbsp; <a class="btn-primary" href="@Url.Action("Index","Customer")"> Back </a>
+                    @Html.HiddenFor(model => model.customer.CustomerID)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

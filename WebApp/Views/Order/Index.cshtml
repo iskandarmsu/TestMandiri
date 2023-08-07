@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model WebApp.ViewModel.OrderViewModel
+<br />
+<div align="left">
+    @Html.ActionLink("Create", "Create", "Order", new { area = "" }, null)
+    <br /><br />
+    <table cellpadding="2"
+           class="table"
+           cellspacing="2"
+           border="1">
+        <tr class="btn-primary">
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Required Date</th>
+            <th>Order Name</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var Ord in ViewBag.listOrders)
+        {
+    <tr class="btn-success">
+        <td>
+            @Ord.OrderId
+        </td>
+        <td>
+            @Ord.OrderDate.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Ord.CustomerID
+        </td>
+        <td>
+            @Ord.CustomerName
+        </td>
+        <td>
+            @Ord.RequiredDate.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Ord.OrderName
+        </td>
+        <td>
+            @Ord.ProductID
+        </td>
+        <td>
+            @Ord.ProductName
+        </td>
+        <td>
+            @Ord.Price
+        </td>
+        <td>
+            @Ord.Qty
+        </td>
+        <td>
+            @Ord.Total
+        </td>
+        <td>
+            <a onclick="return confirm('Do you want to Delete?')"
+               href="@Url.Action("Delete","Order",new {id= Ord.OrderId})">Delete</a> ||
+            <a href="@Url.Action("Edit","Order",new {id= Ord.OrderId})">Edit</a>
+        </td>
+    </tr>
+        }
+    </table>
+</div>

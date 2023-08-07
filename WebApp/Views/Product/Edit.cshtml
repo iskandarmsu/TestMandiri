@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@model WebApp.ViewModel.OrderViewModel
+<h3> Edit </h3>
+<div align="center" width="500px">
+    @using (Html.BeginForm("Edit", "Product", FormMethod.Post))
+    {
+        <table class="table"
+               width="400px"
+               cellpadding="20">
+            <tr class="btn-default">
+                <td>
+                    @Html.LabelFor(model => model.product.ProductName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.product.ProductName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.product.Price)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.product.Price)
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td>
+                    <input type="submit" value="Save" /> &nbsp; <a class="btn-primary" href="@Url.Action("Index","Product")"> Back </a>
+                    @Html.HiddenFor(model => model.product.ProductID)
+
+                </td>
+            </tr>
+        </table>
+    }
+</div>

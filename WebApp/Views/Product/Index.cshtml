@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model WebApp.ViewModel.OrderViewModel
+<br />
+<div align="left">
+    @Html.ActionLink("Create", "Create", "Product", new { area = "" }, null)
+    <br /><br />
+    <table cellpadding="2"
+           class="table"
+           cellspacing="2"
+           border="1">
+        <tr class="btn-primary">
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th> Action</th>
+        </tr>
+        @foreach (var Prod in ViewBag.listProducts)
+        {
+            <tr class="btn-success">
+                <td>
+                    @Prod.ProductID
+                </td>
+                <td>
+                    @Prod.ProductName
+                </td>
+                <td>
+                    @Prod.Price
+                </td>
+                <td>
+                    <a onclick="return confirm('Do you want to Delete?')"
+                       href="@Url.Action("Delete","Product",new {id= Prod.ProductID})">Delete</a> ||
+                    <a href="@Url.Action("Edit","Product",new {id= Prod.ProductID})">Edit</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
